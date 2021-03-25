@@ -22,11 +22,12 @@ class NewprojectApp:
         # build ui
         self.MainFrame = tk.Frame(master)
         
-        self.encrypt_button = tk.Button(self.MainFrame)
+        self.encrypt_button = ttk.Button(self.MainFrame)
         self.encrypt_button.config(text='Encrypt a File')
         self.encrypt_button.place(anchor='nw', height='50', relx='0.05', rely='0.25', width='200', x='0', y='0')
         self.encrypt_button.configure(command=self.encrypt)
-        self.decrypt_button = tk.Button(self.MainFrame)
+        
+        self.decrypt_button = ttk.Button(self.MainFrame)
         self.decrypt_button.config(text='Decrypt a File')
         self.decrypt_button.place(anchor='nw', height='50', relx='0.05', rely='0.58', width='200', x='0', y='0')
         self.decrypt_button.configure(command=self.decrypt)
