@@ -37,3 +37,8 @@ hidden within the folder (makes it easier for you to find the right file).
 4. Locate the variable 'password', delete its '[REDACTED]' assignment, and enter a new long random password 
    as a string.
 6. Save and run.
+
+
+# Known Bugs
+
+- Cannot decrypt previously encrypted executable files.
