@@ -5,7 +5,8 @@ messages.
 
 Encryption is communication among adversaries. So long as they do not know of the existence of this 
 application, your encrypted files will be virtually unbreakable. If they do know of this application,
-you can use the script-version to implement a custom secret key and you provide the most peace of mind.
+you can use the script-version to implement a custom secret key to provide you with the most peace of
+mind.
 
 # EnKryptos v0.02 Changelog
 
@@ -24,6 +25,6 @@ This application is meant to be used as an executable for most users. If you'd p
 script, you'll first need to fill in the "[REDACTED]" password with a long random key that includes 
 uppercase and lowercase characters, numbers, and special characters.
 
-As an executable, all you'll need to get started is the zip file included in this repository. Download it, 
-extract it, and run the .exe file within. Don't move the executable -- it's got a lot of necessary parts
-hidden within the folder (makes it easier to find you the right file).
+As an executable, all you'll need to do to get started is download the zip file included in this repository. 
+Extract it and run the .exe file within. Don't move the executable -- it's got a lot of necessary parts
+hidden within the folder (makes it easier for you to find the right file).
