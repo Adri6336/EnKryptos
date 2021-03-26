@@ -8,16 +8,14 @@ application, your encrypted files will be virtually unbreakable. If they do know
 you can use the script-version to implement a custom secret key to provide you with the most peace of
 mind.
 
-# EnKryptos v0.2 Changelog
+# EnKryptos v0.2.0.1 Changelog
 
-- Added in-app encrypted message generator. Now you can create encrypted text without having
-  to first make an unencrypted copy.
+- Fixed vulnerability. If one implemented a stalking program, they'd be able to extract secret messages
+  before they got encrypted. This new update makes this possibility no longer viable.
   
-- Updated GUI to accommodate both file and message based encryption/decryption.
+- Added curly braces to the list of invalid symbols for file names.
 
-- EnKryptos now preserves the names of the files it encrypts.
-
-- Buttons now glow when hovered over.
+- Changed random.txt to seed.ksf. This change is purely aesthetic.
 
 # Using Enkryptos as Executable
 
@@ -32,7 +30,7 @@ hidden within the folder (makes it easier for you to find the right file).
 # Using Enkryptos as Script
 
 1. pip install pyAesCrypt
-2. Download sourcecode and random.txt. Put both files in the same directory.
+2. Download sourcecode and seed.ksf. Put both files in the same directory.
 3. Open the sourcecode in your preferred text editor.
 4. Locate the variable 'password', delete its '[REDACTED]' assignment, and enter a new long random password 
    as a string.
