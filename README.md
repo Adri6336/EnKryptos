@@ -8,7 +8,7 @@ application, your encrypted files will be virtually unbreakable. If they do know
 you can use the script-version to implement a custom secret key to provide you with the most peace of
 mind.
 
-# EnKryptos v0.02 Changelog
+# EnKryptos v0.2 Changelog
 
 - Added in-app encrypted message generator. Now you can create encrypted text without having
   to first make an unencrypted copy.
