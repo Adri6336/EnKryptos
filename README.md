@@ -17,7 +17,7 @@ mind.
 
 - Changed random.txt to seed.ksf. This change is purely aesthetic.
 
-# Using Enkryptos as Executable
+# Using Enkryptos as an Executable
 
 This application is meant to be used as an executable for most users. If you'd prefer to use it as a 
 script, you'll first need to fill in the "[REDACTED]" password with a long random key that includes 
@@ -27,7 +27,7 @@ As an executable, all you'll need to do to get started is download the zip file 
 Extract it and run the .exe file within. Don't move the executable -- it's got a lot of necessary parts
 hidden within the folder (makes it easier for you to find the right file).
 
-# Using Enkryptos as Script
+# Using Enkryptos as a Script
 
 1. pip install pyAesCrypt
 2. Download sourcecode and seed.ksf. Put both files in the same directory.
