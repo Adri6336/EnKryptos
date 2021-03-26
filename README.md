@@ -1,5 +1,5 @@
 # EnKryptos
-Application for encrypting and decrypting using the AES encryption protocol. With a secet key encoded in 
+Application for encrypting and decrypting using the AES encryption protocol. With a secret key encoded in 
 the executable file, this application will be the only way you can decrypt EnKryptos-encrypted files or 
 messages. 
 
