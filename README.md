@@ -36,3 +36,14 @@ hidden within the folder (makes it easier for you to find the right file).
 4. Locate the variable 'password', delete its '[REDACTED]' assignment, and enter a new long random password 
    as a string.
 6. Save and run.
+
+
+# Notes
+
+- If you have some kind of spyware installed on your computer, EnKryptos could be compromised despite encrypting 
+your files (the information could be intercepted before it gets encrypted). I'm trying to figure out ways to add 
+protections against this, but it's rather difficult to maintain a secret when there's an observer seeing you 
+come up with the secret in the first place. For the time being, to protect against this vulnerability, try to keep
+up good computer practices: don't click on sketchy links, regularly perfom malware scans with services like malwarebytes,
+and don't rely on computers that you suspect might be compromised in some way for encrypting important information. Tbh, 
+I'm not sure if anyone has come up with a solution to vulnerabilities like this; I'll keep looking into it.
