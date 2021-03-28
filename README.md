@@ -8,14 +8,15 @@ application, your encrypted files will be virtually unbreakable. If they do know
 you can use the script-version to implement a custom secret key to provide you with the most peace of
 mind.
 
-# EnKryptos v0.2.0.1 Changelog
+# EnKryptos v0.2.1 Changelog
 
-- Fixed vulnerability. If one implemented a stalking program, they'd be able to extract secret messages
-  before they got encrypted. This new update makes this possibility no longer viable.
-  
-- Added curly braces to the list of invalid symbols for file names.
+- Improved code organization and notes.
 
-- Changed random.txt to seed.ksf. This change is purely aesthetic.
+- EnKryptos now stores encrypted and decrypted information in dedicated folders. 
+
+- Improved temporary-file random name generation.
+
+- Added easter egg.
 
 # Using Enkryptos as an Executable
 
