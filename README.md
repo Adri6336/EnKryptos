@@ -8,15 +8,9 @@ application, your encrypted files will be virtually unbreakable. If they do know
 you can use the script-version to implement a custom secret key to provide you with the most peace of
 mind.
 
-# EnKryptos v0.2.1 Changelog
+# EnKryptos v0.3 Changelog
 
-- Improved code organization and notes.
-
-- EnKryptos now stores encrypted and decrypted information in dedicated folders. 
-
-- Improved temporary-file random name generation.
-
-- Added easter egg.
+- Removed the Python console for script users.
 
 # Using Enkryptos as an Executable
 
@@ -40,10 +34,8 @@ hidden within the folder (makes it easier for you to find the right file).
 
 # Notes
 
-- If you have some kind of spyware installed on your computer, EnKryptos could be compromised despite encrypting 
-your files (the information could be intercepted before it gets encrypted). I'm trying to figure out ways to add 
-protections against this, but it's rather difficult to maintain a secret when there's an observer seeing you 
-come up with the secret in the first place. For the time being, to protect against this vulnerability, try to keep
-up good computer practices: don't click on sketchy links, regularly perfom malware scans with services like malwarebytes,
-and don't rely on computers that you suspect might be compromised in some way for encrypting important information. Tbh, 
-I'm not sure if anyone has come up with a solution to vulnerabilities like this; I'll keep looking into it.
+- The translator encoding provides partial spyware protection. With it, unencrypted files should no longer be 
+easily intercepted. This doesn't mean that interception is impossible, only that it is significantly more
+difficult and would require more advanced spyware (or a keylogger, but in that case you're fucked regardless).
+Moral of the story: don't get hacked, but if you do, the translator should offer a small bit of protection for
+your messages.
