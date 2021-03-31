@@ -34,7 +34,7 @@ hidden within the folder (makes it easier for you to find the right file).
 
 # Notes
 
-- The translator encoding provides partial spyware protection. With it, unencrypted files should no longer be 
+- Translator encoding provides partial spyware protection. With it, unencrypted files should no longer be 
 easily intercepted. This doesn't mean that interception is impossible, only that it is significantly more
 difficult and would require more advanced spyware (or a keylogger, but in that case you're fucked regardless).
 Moral of the story: don't get hacked, but if you do, the translator should offer a small bit of protection for
