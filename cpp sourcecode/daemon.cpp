@@ -4,8 +4,8 @@ using namespace std;
 
 int main()
 {
-	daemon Stealth;
-	Stealth.activate();
+	daemon stealth;
+	stealth.activate();
 
 	return 0;
 }
