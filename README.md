@@ -10,7 +10,11 @@ mind.
 
 # EnKryptos v0.3 Changelog
 
-- Removed the Python console for script users.
+- Added a decrypted message / notification viewer.
+
+- Eliminated a hacking vulnerability by circumventing the need to create an unencrypted file during message encryption.
+
+- Added notifications that inform you when a process has been aborted and why it was aborted.
 
 # Using Enkryptos as an Executable
 
@@ -25,7 +29,7 @@ hidden within the folder (makes it easier for you to find the right file).
 # Using Enkryptos as a Script
 
 1. pip install pyAesCrypt
-2. Download sourcecode and seed.ksf. Put both files in the same directory.
+2. Download sourcecode and pyAesCryptMod. Put both files in the same directory.
 3. Open the sourcecode in your preferred text editor.
 4. Locate the variable 'password', delete its '[REDACTED]' assignment, and enter a new long random password 
    as a string.
@@ -34,8 +38,8 @@ hidden within the folder (makes it easier for you to find the right file).
 
 # Notes
 
-- Translator encoding provides partial spyware protection. With it, unencrypted files should no longer be 
-easily intercepted. This doesn't mean that interception is impossible, only that it is significantly more
-difficult and would require more advanced spyware (or a keylogger, but in that case you're fucked regardless).
-Moral of the story: don't get hacked, but if you do, the translator should offer a small bit of protection for
-your messages.
+- The update provides partial spyware protection. With it, an adversary scanning your files won't be able to 
+intercept your unencrypted messages. This doesn't mean that interception is impossible, only that it is 
+significantly more difficult and would require more advanced spyware (or a keylogger, but in that case 
+you're fucked regardless). Moral of the story: don't get hacked, but if you do, EnKryptos should offer 
+some protection for your messages.
