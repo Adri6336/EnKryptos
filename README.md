@@ -3,8 +3,8 @@ Application for encrypting and decrypting using the AES encryption protocol. Wit
 the executable file, this application will be the only way you can decrypt EnKryptos-encrypted files or 
 messages. 
 
-Encryption enables communication among adversaries. So long as they do not know of the existence of this 
-application, your encrypted files will be virtually unbreakable. If they do know of this application,
+Encryption enables communication among adversaries. So long as they don't know of the existence of this 
+application, your encrypted files will be virtually unbreakable. If they are aware of EnKryptos,
 you can use the script-version to implement a custom secret key to provide you with the most peace of
 mind.
 
