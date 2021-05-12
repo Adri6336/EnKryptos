@@ -25,9 +25,9 @@ uppercase and lowercase characters, numbers, and special characters.
 As an executable, all you'll need to do to get started is download the Enkryptos-win.zip file included in this repository. 
 Extract it and do the following:
 
-**Windows**
+**Windows:**
 
-find the EnKryptos.exe file within and double click to run. Don't move the executable from its folder -- there's a lot of necessary parts
+Find the EnKryptos.exe file within and double click to run. Don't move the executable from its folder -- there's a lot of necessary parts
 hidden within the folder (makes it easier for you to find the right file).
 
 # Using Enkryptos as a Script
