@@ -46,4 +46,4 @@ hidden within the folder (makes it easier for you to find the right file).
 intercept your unencrypted messages. This doesn't mean that interception is impossible, only that it is 
 significantly more difficult and would require more advanced spyware (or a keylogger, but in that case 
 you're fucked regardless). Moral of the story: don't get hacked, but if you do, EnKryptos should offer 
-some protection for your messages.
+*a little* protection for your messages.
