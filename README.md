@@ -46,7 +46,7 @@ Strength Reason: since the script will require that you use a custom secret key,
 2. Download sourcecode and pyAesCryptMod. Put both files in the same directory.
 3. Open the sourcecode in your preferred text editor.
 4. Locate the variable 'password', delete its '[REDACTED]' assignment, and enter a new very long random password 
-   as a string.
+   as a string. This password should contain special characters, upper and lower case letters, and numbers. Example password: "Rg^%ccat4@@bcws6UMb!PaG&11796#bvarTipU0c%^\*" (Do not use this as your password)
 6. Save and run.
 
 
