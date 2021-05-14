@@ -22,7 +22,7 @@ This application is meant to be used as an executable for most users. If you'd p
 script, you'll first need to fill in the "[REDACTED]" password with a long random key that includes 
 uppercase and lowercase characters, numbers, and special characters.
 
-As an executable, all you'll need to do to get started is download the EnKryptos-win.zip or EnKryptos-lin.tar.gz files (for Windows and Linux, respectively) included in this repository. 
+As an executable, all you'll need to do to get started is download the EnKryptos-win.zip or EnKryptos-Lin.tar.gz files (for Windows and Linux, respectively) included in this repository. 
 
 Extract it and do the following:
 
@@ -30,6 +30,10 @@ Extract it and do the following:
 
 Find the EnKryptos.exe file within and double click to run. Don't move the executable from its folder -- there's a lot of necessary parts
 hidden within the folder (makes it easier for you to find the right file).
+
+**Linux**
+
+After extracting the tarball, cd into the extracted folder. Locate the EnKryptos file and use "./EnKryptos" to execute it. 
 
 # Using Enkryptos as a Script
 
