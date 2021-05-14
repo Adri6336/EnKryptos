@@ -40,13 +40,14 @@ After extracting the tarball, cd into the extracted folder. Locate the EnKryptos
 Strength Reason: since the script will require that you use a custom secret key, it should be nearly impossible for an adversary to decrypt EnKryptos-encrypted files, regardless of their knowledge of this program. In order to discover your secrets, they'd need to learn your secret key or install some kind of advanced spyware that intercepts information before you have a chance to encrypt it. (Note: adversaries could learn how to decrypt your files if they hack you and get access to the script file, which contains your secret key. One possible solution to this, off the top of my head, is to keep the script on a USB and transfer your encrypted files to some other storage medium immediately after encryption (keep the encrypted files away from the script until you need to decrypt them).)
 
 **Steps:**
+
 0. Ensure you have Python 3.8 or greater installed.
 
 1. pip install pyAesCrypt and tkinter (if your Python version does not already have this installed)
 2. Download sourcecode and pyAesCryptMod. Put both files in the same directory.
 3. Open the sourcecode in your preferred text editor.
 4. Locate the variable 'password', delete its '[REDACTED]' assignment, and enter a new very long random password 
-   as a string. This password should contain special characters, upper and lower case letters, and numbers. Example password: "Rg^%ccat4@@bcws6UMb!PaG&11796#bvarTipU0c%^\*" (Do not use this as your password)
+   as a string. This password should contain special characters, upper and lower case letters, and numbers. Example password: "Rg^%ccat4@@bcws6UMb!PaG&11796#bvarTipU0c%^\*" (do not use this as your password).
 6. Save and run.
 
 
