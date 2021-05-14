@@ -1,4 +1,6 @@
 # EnKryptos
+**By using EnKryptos, you agree to use it at your own risk, hold me free of any responsiblilty should any kinds of loss or damage occur, and only use it on information you either own or have explicit permission to encrypt. This program will encrypt files, so if you use it negligently you could permanently lose access to your information. Be sure to use EnKryptos intelligently and with caution.**
+
 Application for encrypting and decrypting using the AES encryption protocol. With a secret key encoded in 
 the executable file, this application will be the only way you can decrypt EnKryptos-encrypted files or 
 messages. 
@@ -16,7 +18,9 @@ mind.
 
 - Added notifications that inform you when a process has been aborted and why it was aborted.
 
-# Using Enkryptos as an Executable
+# Using Enkryptos as an Executable (Weak to Normal Encryption Strength)
+
+Strenghth Reason: since the secret key is encoded into the executable file, an adversary aware of EnKryptos could simply use their own copy to decrypt the file. Since this program is still relatively unknown, this shouldn't be too large an issue for standard use. If you want to encrypt files with the best security possible, I'd recommend running it as a script instead.
 
 This application is meant to be used as an executable for most users. If you'd prefer to use it as a 
 script, you'll first need to fill in the "[REDACTED]" password with a long random key that includes 
@@ -35,12 +39,14 @@ hidden within the folder (makes it easier for you to find the right file).
 
 After extracting the tarball, cd into the extracted folder. Locate the EnKryptos file and use "./EnKryptos" to execute it. 
 
-# Using Enkryptos as a Script
+# Using Enkryptos as a Script (Strong Encryption Strength)
+
+Strength Reason: since the script will require that you use a custom secret key, it would be nearly impossible for an adversary to decrypt EnKryptos-encrypted files, regardless of their knowledge of this program. In order to discover your secrets, they'd need to learn your secret key or install some kind of advanced spyware. (Note: adversaries could learn how to decrypt your files if they hack you and get access to the script file. One possible solution to this, off the top of my head, is to keep the script on a usb and transfer your encrypted files to some other storage medium immediately after encryption (keep the encrypted files away from the script until you need to decrypt them)).
 
 1. pip install pyAesCrypt
 2. Download sourcecode and pyAesCryptMod. Put both files in the same directory.
 3. Open the sourcecode in your preferred text editor.
-4. Locate the variable 'password', delete its '[REDACTED]' assignment, and enter a new long random password 
+4. Locate the variable 'password', delete its '[REDACTED]' assignment, and enter a new very long random password 
    as a string.
 6. Save and run.
 
