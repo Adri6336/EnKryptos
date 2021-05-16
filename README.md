@@ -31,7 +31,7 @@ Extract it and do the following:
 Find the EnKryptos.exe file within and double click to run. Don't move the executable from its folder -- there's a lot of necessary parts
 hidden within the folder (makes it easier for you to find the right file).
 
-**Linux**
+**Linux:**
 
 After extracting the tarball, cd into the extracted folder. Locate the EnKryptos file and use "./EnKryptos" to execute it. 
 
