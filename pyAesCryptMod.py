@@ -36,11 +36,11 @@
 
 
 # Modified by Adrian Villegas
-# I have no idea what I'm doing here, but hopefully it works
+# I have no idea what I'm doing here, but I somehow made it work
 # Changelog:
 #   - Deleted some stuff
 #   - Made pyAesCrypt able to use StringIO files
-#   - Removed a safeguard as it was unnecessary for my use case
+#   - Removed a safeguard as it was unnecessary for my use case (doesn't reduce encryption security)
 
 
 # pyAesCrypt module
