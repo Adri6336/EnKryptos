@@ -1,14 +1,7 @@
 # EnKryptos
 ***By using EnKryptos, you agree to use it at your own risk, hold me free of any responsiblilty should any kinds of loss or damage occur, and only use it on information you either own or have explicit permission to encrypt. This program will encrypt files, so if you use it negligently you could permanently lose access to your information. Be sure to use EnKryptos intelligently and with caution.***
 
-EnKryptos is an application for encrypting and decrypting files using the AES encryption protocol. With a secret key encoded in 
-the executable file, this application will be the only way you can decrypt EnKryptos-encrypted files or 
-messages. 
-
-Encryption enables communication among adversaries. As long as they not aware of the existence of this 
-application, your encrypted files should be virtually unbreakable. If they are aware of EnKryptos,
-you can use the script-version to implement a custom secret key to provide you with the most peace of
-mind and security.
+Encryption enables communication among adversaries. With EnKryptos, your encrypted files and messages are virtually unbreakable. This application uses the AES encryption protocol (a cipher approved by the U.S. National Security Agency (NSA) for protecting top-secret information) with a random key of 500 character length.
 
 # EnKryptos v0.3.1 Changelog
 
@@ -16,11 +9,11 @@ mind and security.
 
 - Added more feedback messages via the display window.
 
-- Expanded pyAesCryptMod to allow the decryption of files without creating a dedicated file on the hard-drive. 
+- Expanded pyAesCryptMod to allow the decryption of messages without creating a dedicated unprotected file on the hard-drive. 
 
 # Using Enkryptos as an Executable (Strong Encryption Strength)
 
-Strenghth Reason: random keys are generated on first start up. Even if an adversary knew about EnKryptos and had their own copy, they wouldn't be able to decrypt your files without somehow getting access to your key. Keep your key secure and your files will be virtually unbreakable. With each random key being 500 characters long and containing random placements of upprcase and lowercase characters, numbers, and special characters, it would effectively take an infinite amount of time to brute force.
+Strenghth Reason: random keys are generated on first start up. Even if an adversary knew about EnKryptos and had their own copy, they wouldn't be able to decrypt your files without somehow getting access to your special key. Keep your key secure and your files will be virtually unbreakable. With each random key being 500 characters long and containing random placements of upprcase and lowercase characters, numbers, and special characters, it would effectively take an infinite amount of time to brute force.
 
 As an executable, all you'll need to do to get started is download the EnKryptos-Win.zip or EnKryptos-Lin.tar.gz files (for Windows and Linux, respectively) included in this repository. 
 
