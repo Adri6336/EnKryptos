@@ -32,9 +32,10 @@ After extracting the tarball, cd into the extracted folder. Locate the EnKryptos
 **Steps:**
 
 1. Ensure you have Python 3.8 or greater installed.
-2. pip install pyAesCrypt and tkinter (if your Python version does not already have this installed)
+2. pip install pyAesCrypt and tkinter (if your Python version does not already have this installed).
 3. Download sourcecode and pyAesCryptMod. Put both files in the same directory.
-4. Run with Python.
+4. Open the script with a text editor. Replace the keyPass variable assignment with a long random password.
+5. Run with Python.
 
 
 # Notes
