@@ -42,4 +42,4 @@ After extracting the tarball, cd into the extracted folder. Locate the EnKryptos
 
 - Keys are unique and non-recoverable. If you somehow lose your key, your encrypted files will made useless clusters of obfuscated data. Do not lose your key.
 
-- Keys created with the script version will not be interoperable with the executable version. 
+- Keys created with the script version will not be interoperable with the executable version. If you want to share your key with other parties that are also using the script version, you'll need to give them the value you entered for the keyPass variable; they must use this password as well to decrypt your messages.
