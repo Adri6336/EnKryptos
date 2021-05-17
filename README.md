@@ -12,15 +12,15 @@ mind and security.
 
 # EnKryptos v0.3 Changelog
 
-- Added a decrypted message / notification viewer.
+- Added keys. Keys will dramatically enhance encrypted file security.
 
-- Eliminated a hacking vulnerability by circumventing the need to create an unencrypted file during message encryption.
+- Added more feedback messages via the display window.
 
-- Added notifications that inform you when a process has been aborted and why it was aborted.
+- Expanded pyAesCryptMod to allow the decryption of files without creating a dedicated file on the hard-drive. 
 
-# Using Enkryptos as an Executable (Weak to Normal Encryption Strength)
+# Using Enkryptos as an Executable (Strong Encryption Strength)
 
-Strenghth Reason: since the secret key is encoded into the executable file, an adversary aware of EnKryptos could simply use their own copy to decrypt the file. Since this program is still relatively unknown, this shouldn't be too large an issue for standard use. If you want to encrypt files with the best security possible, I'd recommend running it as a script instead.
+Strenghth Reason: random keys are generated on first start up. Even if an adversary knew about EnKryptos and had their own copy, they wouldn't be able to decrypt. 
 
 As an executable, all you'll need to do to get started is download the EnKryptos-win.zip or EnKryptos-Lin.tar.gz files (for Windows and Linux, respectively) included in this repository. 
 
@@ -28,16 +28,13 @@ Extract it and do the following:
 
 **Windows:**
 
-Find the EnKryptos.exe file within and double click to run. Don't move the executable from its folder -- there's a lot of necessary parts
-hidden within the folder (makes it easier for you to find the right file).
+After extracting the zip, find the EnKryptos.exe file within the new folder and double click to run. Don't move the executable from its folder -- there's a lot of necessary parts hidden within the folder (makes it easier for you to find the right file).
 
 **Linux:**
 
 After extracting the tarball, cd into the extracted folder. Locate the EnKryptos file and use "./EnKryptos" to execute it. 
 
-# Using Enkryptos as a Script (Strong Encryption Strength)
-
-Strength Reason: since the script will require that you use a custom secret key, it should be nearly impossible for an adversary to decrypt EnKryptos-encrypted files, regardless of their knowledge of this program. In order to discover your secrets, they'd need to learn your secret key or install some kind of advanced spyware that intercepts information before you have a chance to encrypt it. (Note: adversaries could learn how to decrypt your files if they hack you and get access to the script file, which contains your secret key. One possible solution to this, off the top of my head, is to keep the script on a USB and transfer your encrypted files to some other storage medium immediately after encryption (keep the encrypted files away from the script until you need to decrypt them).)
+# Using Enkryptos as a Script 
 
 **Steps:**
 
@@ -45,10 +42,7 @@ Strength Reason: since the script will require that you use a custom secret key,
 
 1. pip install pyAesCrypt and tkinter (if your Python version does not already have this installed)
 2. Download sourcecode and pyAesCryptMod. Put both files in the same directory.
-3. Open the sourcecode in your preferred text editor.
-4. Locate the variable 'password', delete its '[REDACTED]' assignment, and enter a new very long random password 
-   as a string. This password should contain special characters, upper and lower case letters, and numbers. Example password: "Rg^%ccat4@@bcws6UMb!PaG&11796#bvarTipU0c%^\*" (do not use this as your password).
-6. Save and run.
+3. Run with Python.
 
 
 # Notes
