@@ -31,11 +31,10 @@ After extracting the tarball, cd into the extracted folder. Locate the EnKryptos
 
 **Steps:**
 
-0. Ensure you have Python 3.8 or greater installed.
-
-1. pip install pyAesCrypt and tkinter (if your Python version does not already have this installed)
-2. Download sourcecode and pyAesCryptMod. Put both files in the same directory.
-3. Run with Python.
+1. Ensure you have Python 3.8 or greater installed.
+2. pip install pyAesCrypt and tkinter (if your Python version does not already have this installed)
+3. Download sourcecode and pyAesCryptMod. Put both files in the same directory.
+4. Run with Python.
 
 
 # Notes
