@@ -10,7 +10,7 @@ application, your encrypted files should be virtually unbreakable. If they are a
 you can use the script-version to implement a custom secret key to provide you with the most peace of
 mind and security.
 
-# EnKryptos v0.3 Changelog
+# EnKryptos v0.3.1 Changelog
 
 - Added keys. Keys will dramatically enhance encrypted file security.
 
@@ -20,9 +20,9 @@ mind and security.
 
 # Using Enkryptos as an Executable (Strong Encryption Strength)
 
-Strenghth Reason: random keys are generated on first start up. Even if an adversary knew about EnKryptos and had their own copy, they wouldn't be able to decrypt. 
+Strenghth Reason: random keys are generated on first start up. Even if an adversary knew about EnKryptos and had their own copy, they wouldn't be able to decrypt your files without somehow getting access to your key. Keep your key secure and your files will be virtually unbreakable. With each random key being 500 characters long and containing random placements of upprcase and lowercase characters, numbers, and special characters, it would effectively take an infinite amount of time to brute force.
 
-As an executable, all you'll need to do to get started is download the EnKryptos-win.zip or EnKryptos-Lin.tar.gz files (for Windows and Linux, respectively) included in this repository. 
+As an executable, all you'll need to do to get started is download the EnKryptos-Win.zip or EnKryptos-Lin.tar.gz files (for Windows and Linux, respectively) included in this repository. 
 
 Extract it and do the following:
 
@@ -47,8 +47,4 @@ After extracting the tarball, cd into the extracted folder. Locate the EnKryptos
 
 # Notes
 
-- The update provides partial spyware protection. With it, an adversary scanning your files won't be able to 
-intercept your unencrypted messages. This doesn't mean that interception is impossible, only that it is 
-significantly more difficult and would require more advanced spyware (or a keylogger, but in that case 
-you're fucked regardless). Moral of the story: don't get hacked, but if you do, EnKryptos should offer 
-*a little* protection for your messages.
+- Keys are unique and non-recoverable. If you somehow lose your key, your encrypted files will made useless clusters of obfuscated data. Do not lose your key.
