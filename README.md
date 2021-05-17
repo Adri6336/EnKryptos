@@ -41,3 +41,5 @@ After extracting the tarball, cd into the extracted folder. Locate the EnKryptos
 # Notes
 
 - Keys are unique and non-recoverable. If you somehow lose your key, your encrypted files will made useless clusters of obfuscated data. Do not lose your key.
+
+- Keys created with the script version will not be interoperable with the executable version. 
