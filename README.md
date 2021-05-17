@@ -15,7 +15,7 @@ Encryption enables communication among adversaries. With EnKryptos, your encrypt
 
 Strenghth Reason: random keys are generated on first start up. Even if an adversary knew about EnKryptos and had their own copy, they wouldn't be able to decrypt your files without somehow getting access to your particular special key. Keep your key secure and your files will be virtually unbreakable. With each random key being 500 characters long and containing random placements of upprcase and lowercase characters, numbers, and special characters, it would effectively take an infinite amount of time to brute force your password. With EnKryptos Decryption Keys, your files will be ultra-secure.
 
-As an executable, all you'll need to do to get started is download the EnKryptos-Win.zip or EnKryptos-Lin.tar.gz files (for Windows and Linux, respectively) included in this repository. 
+As an executable, all you'll need to do to get started is download the EnKryptos-Win.zip or EnKryptos-Lin.tar.gz files (for Windows and Linux, respectively) included in this repository. This is the way EnKryptos is intended to be commonly used.
 
 Extract it and do the following:
 
