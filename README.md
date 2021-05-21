@@ -43,3 +43,8 @@ After extracting the tarball, cd into the extracted folder. Locate the EnKryptos
 - Keys are unique and non-recoverable. If you somehow lose your key, your encrypted files will made useless clusters of obfuscated data. Do not lose your key.
 
 - Keys created with the script version will not be interoperable with the executable version. If you want to share your key with other parties that are also using the script version, you'll need to give them the value you entered for the keyPass variable; they must use this password as well to decrypt your messages.
+
+
+# Q&A
+Q: How to use EnKryptos to safely send data over the internet?
+A: Physically give your key to your intended recipient (via USB, SD card, direct transfer by cable, etc.). You can do this giving them a copy of your EnKryptos folder in a zip/tar.gz after you've run EnKryptos at least once (the keys are only generated upon first startup). Once they've got an EnKryptos copy with the valid key, you should be good to send encrypted files through email or other internet tools. To maximize privacy, you should use a secure email service like [CTemplar](https://ctemplar.com/) (paid service) or [ProtonMail](https://protonmail.com/) (free).
