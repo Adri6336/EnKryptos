@@ -9,7 +9,9 @@ Encryption enables communication among adversaries. With EnKryptos, your encrypt
 
 - Added more notes to source code
 
-- Added more descriptive feedback, particularly on instances where behavior was not executed as expected
+- Added more descriptive feedback messages, particularly on instances where behavior was not executed as expected
+
+- 
 
 - Added easter egg
 
