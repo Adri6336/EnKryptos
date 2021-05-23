@@ -5,11 +5,13 @@ Encryption enables communication among adversaries. With EnKryptos, your encrypt
 
 # EnKryptos v0.3.1 Changelog
 
-- Added special keys. They will dramatically enhance encrypted file security.
+- Cleaned source code
 
-- Added more feedback messages communicated via the display window.
+- Added more notes to source code
 
-- Expanded pyAesCryptMod to allow the decryption of messages without creating a dedicated unprotected file on the hard-drive. 
+- Added more descriptive feedback, particularly on instances where behavior was not executed as expected
+
+- Added easter egg
 
 # Using Enkryptos as an Executable (Strong Encryption Strength)
 
