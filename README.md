@@ -11,7 +11,7 @@ Encryption enables communication among adversaries. With EnKryptos, your encrypt
 
 - Added more descriptive feedback messages, particularly on instances where behavior was not executed as expected
 
-- 
+- Minor fix to improve hacking defense
 
 - Added easter egg
 
