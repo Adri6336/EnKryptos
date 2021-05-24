@@ -22,7 +22,7 @@ Encryption enables communication among adversaries. With EnKryptos, your encrypt
 
 # Using Enkryptos as an Executable (Strong Encryption Strength)
 
-Strenghth Reason: random keys are generated on first start up. Even if an adversary knew about EnKryptos and had their own copy, they wouldn't be able to decrypt your files without somehow getting access to your particular special key. Keep your key secure and your files will be virtually unbreakable. With each random key being 500 characters long and containing random placements of upprcase and lowercase characters, numbers, and special characters, it would effectively take an infinite amount of time to brute force your password. With EnKryptos Decryption Keys, your files will be ultra-secure.
+Strenghth Reason: random keys are generated on first start up. Even if an adversary knew about EnKryptos and had their own copy, they wouldn't be able to decrypt your files without somehow getting access to your particular special key. Keep your key secure and your files will be virtually unbreakable. With each random key being 500 characters long and containing random placements of upprcase and lowercase characters, numbers, and special characters, it would effectively take an infinite amount of time to brute force your password. With EnKryptos Decryption Keys (EDK), your files will be ultra-secure.
 
 As an executable, all you'll need to do to get started is download the EnKryptos-Win.zip or EnKryptos-Lin.tar.gz files (for Windows and Linux, respectively) included in this repository. This is the way EnKryptos is intended to be commonly used.
 
@@ -36,14 +36,16 @@ After extracting the zip, find the EnKryptos.exe file within the new folder and 
 
 After extracting the tarball, cd into the extracted folder. Locate the EnKryptos file and use "./EnKryptos" to execute it. 
 
-# Using Enkryptos as a Script 
+# Using Enkryptos as a Script (Ultra Strength)
+
+Strength Reason: since the script demands a custom keyPass assignment, your files will have two levels of personalized encryption. The first level: keys will be encrypted with a special user-defined password (these keys will only work with other script-versions of EnKryptos with the equivalent keyPass assignment); the second level: your random EDK key will be used to encrypt and decrypt files and messages. Even if an adversary stole your EDK file, they wouldn't be able use it to decrypt your files unless they also stole your EnKryptos copy with the correct keyPass assignment.
 
 **Steps:**
 
 1. Ensure you have Python 3.8 or greater installed.
 2. pip install pyAesCrypt and tkinter (if your Python version does not already have this installed).
 3. Download main.py and pyAesCryptMod.py. Put both files in the same directory.
-4. Open main.py with a text editor. Replace the keyPass variable assignment with a long random password.
+4. Open main.py with a text editor. Replace the keyPass variable assignment with a long random password (you can enter the code "test random" in the "Enter Message Title" textbox within the exe version of EnKryptos to get a series of random codes -- use a couple of these).
 5. Run main.py with Python.
 
 
