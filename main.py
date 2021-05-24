@@ -1,39 +1,42 @@
 # Gui created with Pygubu-Designer
 import tkinter.ttk as ttk  # Needed for gui
 from tkinter import filedialog  # Needed to select files
-import pyAesCrypt  # Needed for aes encryption of files
+import pyAesCrypt  # Needed for aes encryption and decryption of files
 import pyAesCryptMod as messageMod  # Needed for message encryption (allows me to use pseudo-files)
 import os  # Needed for creating files, identifying valid paths, and deleting files
 from random import randint  # Needed for key generation
-from io import StringIO as fakeFile  # Needed for hacking defense
+from io import StringIO as fakeFile  # Needed for hacking defense (prevents hard-drive files from being created)
 
 
 class EnKryptosGUI:
-    tempPath = ''  # Will hold file pathways temporarily
-    fileType = ''  # Unused?
-    tempExten = ''  # Will hold file extensions temporarily
+    homeDir = os.getcwd()  # Will hold pathway to EnKryptos' working directory
+    opSys = os.name  # If posix, Linux; if nt, Windows
     password = ''  # The EnKryptos key information will be inserted here
     keyPass = '[REDACTED]'  # This handles key encryption
     invalid = ['!', '@', '#', '$', '%',
-                '^', '&', '*', '(', ')',
-                '+', '=', '\\', '/', ':'
-                ';', '"', "'", '<', '>',
-                '?', '|', '{', '}']  # Special symbols that are not allowed in naming files
+               '^', '&', '*', '(', ')',
+               '+', '=', '\\', '/', ':'
+               ';', '"', "'", '<', '>',
+               '?', '|', '{', '}']  # Special symbols that are not allowed in naming messages
 
     def __init__(self, master=None):
         # 1. Get or create key
         if os.path.isfile('key/key.EDK'):  # If we've got a key already
-            # Decrypt key and assign contents to password
+            # 1. Decrypt key and assign contents to password
             bit = 64 * 1024
             key = fakeFile()
             messageMod.decryptFile('key/key.EDK', key, self.keyPass, bit)
             self.password = key.getvalue()
+
+            # 2. Prevent leak of key info
             key.close()  # Closing of fake files done to prevent keyPass from being discovered (hacker defense)
+
+            # 3. Recognize that this is not the first boot
             firstBoot = False
 
         else:  # If we don't have a key
             # 1. Randomly create one
-            self.password = self.randGen(size=500)
+            self.password = self.randGen(size=500)  # This is admittedly gratuitous, but I like it like this
 
             # 2. Save to fake file
             self.folderExists(type='key')
@@ -50,6 +53,7 @@ class EnKryptosGUI:
             except:
                 ramFile.close()  # If something goes wrong, immediately close file to prevent key being discovered
 
+            # 4. Recognize that this is probably the first boot
             firstBoot = True
 
         # 2. Build ui
@@ -86,12 +90,6 @@ class EnKryptosGUI:
         _text_ = '''Enter Message to Encrypt'''
         self.Secret_Message.insert('0.0', _text_)
         self.Secret_Message.place(anchor='nw', height='115', relx='0.46', rely='0.15', width='300', x='0', y='0')
-
-        # Unused Feedback Text?
-        self.feedback = ttk.Label(self.MainFrame)
-        feedbackText = tk.StringVar('')
-        self.feedback.config(font='{Arial} 10 {bold}', text='Encrypted Text File Created', textvariable=feedbackText)
-        self.feedback.place(anchor='nw', relx='0.64', rely='0.57', x='0', y='0')
 
         # Separator
         self.separator_1 = ttk.Separator(self.MainFrame)
@@ -148,93 +146,90 @@ class EnKryptosGUI:
 
     def encrypt(self):  # This function will encrypt files
         try:
-            # 1. Wipe the previously stored extension
-            self.tempExten = ''
-
-            # 2. Acquire new pathway and get relevant information
-            pathway = filedialog.askopenfilename(initialdir='', title='Select a File to Encrypt',
+            # 1. Acquire new pathway and get relevant information
+            pathway = filedialog.askopenfilename(initialdir=self.homeDir, title='Select a File to Encrypt',
                                                  filetypes=(("All Files", "*.*"), ('Text', '*.txt')))
-            self.tempPath = pathway  # Save acquired path to temp path to enable processing
 
-            if not os.path.isfile(str(self.tempPath)):  # If there's no path, the user exited out. Abort.
+            if not os.path.isfile(str(pathway)):  # If there's no path, the user exited out. Abort.
                 return
 
-            self.getPathExt()  # Process the path: get the extension
+            extension = self.getPathExt(path=pathway)  # Process the path: get the extension
             fileName = self.getName(path=pathway, encrypt=True)  # Identify the name of the file
 
-            # 3. Determine if user is trying to re-encrypt an already encrypted file. If so, abort.
-            if self.tempExten == '.aes' or self.tempExten == '.EDK':
+            # 2. Determine if user is trying to re-encrypt an already encrypted file. If so, abort.
+            if extension == '.aes' or extension == '.EDK':
                 self.changeText(text='ERROR: Process Aborted\nREASON: Attempt to encrypt already encrypted file')
                 return
 
-            # 4. Begin encryption and properly save file
-            if pathway != '' and pathway != 'No File Selected': # If we've got a valid path, begin operation.
+            # 3. Begin encryption and properly save file
+            if pathway != '' and pathway != 'No File Selected':  # If we've got a valid path, begin operation.
                 bit = 64 * 1024
                 self.folderExists(type='encrypt')
-                pyAesCrypt.encryptFile(pathway, 'encrypted_files/' + fileName + self.tempExten + '.aes',
+                pyAesCrypt.encryptFile(pathway, 'encrypted_files/' + fileName + extension + '.aes',
                                        self.password, bit)
 
             self.changeText(text='File Successfully Encrypted!')
 
-        except Exception as e: # If something goes wrong, alert user and exit the function.
+        except Exception as e:  # If something goes wrong, alert user and exit the function.
             self.changeText(text='ERROR: Encryption Failed\nREASON: ' + str(e))
 
 
     def decrypt(self):  # This function will decrypt files
         try:
-            # 1. Clear extension variable, get path
-            self.tempExten = ''
-            pathway = filedialog.askopenfilename(initialdir='', title='Select a File to Decrypt',
-                                                 filetypes=(("Encrypted Files", "*.aes"), ('Invalid Files', '*.*')))
-            self.tempPath = pathway
+            # 1. Ensure that an encrypted_files directory exists
+            self.folderExists(type='encrypt')  # If the encrypted files folder does not exist make it
+            if self.opSys == 'nt':  # If OS == Windows
+                folder = self.homeDir + '\\encrypted_files'
 
-            # 1.5 Determine if this is a valid file to decrypt
-            if not os.path.isfile(str(self.tempPath)): # If there's no path, the user exited out. Abort.
+            else:  # If OS == Linux-based
+                folder = self.homeDir + '/encrypted_files'
+
+            # 2. Get pathway to .aes file
+            pathway = filedialog.askopenfilename(initialdir=folder, title='Select a File to Decrypt',
+                                                 filetypes=(("Encrypted Files", "*.aes"), ('Invalid Files', '*.*')))
+
+            # 3. Determine if this is a valid file to decrypt
+            if not os.path.isfile(str(pathway)):  # If there's no valid path, the user exited out. Abort.
                 return
 
-            self.getPathExt()
+            extension = self.getPathExt(path=pathway)  # Store the current extension of the file
 
-            if self.tempExten != '.aes' and not self.tempExten == '.EDK':
-                self.changeText(text='ERROR: Process Aborted\nREASON: Attempt '+
+            if extension != '.aes' and not extension == '.EDK':  # If current file is not encrypted, abort
+                self.changeText(text='ERROR: Process Aborted\nREASON: Attempt ' +
                                      'to decrypt a file that\'s either unencrypted or encrypted with another app')
                 return
 
-            elif self.tempExten == '.EDK':
+            elif extension == '.EDK':  # If file is EDK, refuse access
                 self.changeText(text='ERROR: Access Denied\nREASON: Attempt ' +
                                      'to decrypt EnKryptos decryption key')
                 return
 
-            self.tempExten = '' # Clean the temp exten
-
-            # 2. Identify pre-encryption filetype
-            self.getOldExt()
-            if self.tempExten == '.msg':  # Detect if file is an EnKryptos message
+            # 4. Identify pre-encryption filetype
+            oldExten = self.getOldExt(pathway)
+            if oldExten == '.msg':  # Detect if file is an EnKryptos message
                 isMessage = True
             else:
                 isMessage = False
 
-            # 3. Identify the name of the file
+            # 5. Identify the name of the file
             fileName = self.getName(path=pathway, encrypt=False)
 
-            # 4. Begin decryption process
-
-            if not isMessage:
-
+            # 6. Begin decryption process
+            if not isMessage:  # If the file is not a msg file, decrypt normally
                 if pathway != '' and pathway != 'No File Selected':
                     bit = 64 * 1024
                     self.folderExists(type='decrypt')
-                    pyAesCrypt.decryptFile(pathway, 'decrypted_files/' + fileName + self.tempExten, self.password, bit)
-                    finPath = 'decrypted_files/' + fileName + self.tempExten
-                    self.changeText(text=self.tempExten + ' File Successfully Decrypted!')
+                    pyAesCrypt.decryptFile(pathway, 'decrypted_files/' + fileName + oldExten, self.password, bit)
+                    # finPath = 'decrypted_files/' + fileName + oldExten  (Not sure what this was for)
+                    self.changeText(text=oldExten + ' File Successfully Decrypted!')
 
-            else:
-
+            else:  # If the file is an msg file, decrypt using fake file and output data to display window
                 if pathway != '' and pathway != 'No File Selected':
                     bit = 64 * 1024
                     outputF = fakeFile()
                     messageMod.decryptFile(pathway, outputF, self.password, bit)
                     self.changeText(text=outputF.getvalue())
-                    outputF.close()
+                    outputF.close()  # Close fake file for hacking defense
 
         except:
             self.changeText(text='ERROR: Decryption Failed\nREASON: ' +
@@ -243,8 +238,8 @@ class EnKryptosGUI:
 
     def encryptMessage(self):  # This function will encrypt a new message
         # 1. Get message contents, determine if name is valid (if not, clean it)
-        toEncode = self.Secret_Message.get("1.0", "end-1c")
-        subject = self.messageName.get()
+        toEncode = self.Secret_Message.get("1.0", "end-1c")  # Gets message content
+        subject = self.messageName.get()  # Gets message title
 
         # 1.1 Easter Eggs or test codes
         isJoke = self.easterEgg(code=subject)  # Returns a bool
@@ -257,10 +252,10 @@ class EnKryptosGUI:
 
         # 1.2 Clean invalid names
 
-        for item in self.invalid: # Look at every invalid symbol
-            for char in subject: # Look at every character in the name
-                if item in char: # If an invalid symbol is found at the character position
-                    subject = subject.replace(char, '') # Replace it with an empty character
+        for item in self.invalid:  # Look at every invalid symbol
+            for char in subject:  # Look at every character in the name
+                if item in char:  # If an invalid symbol is found at the character position
+                    subject = subject.replace(char, '')  # Replace it with an empty character
 
         # 2. Save to fake file
         ramFile = fakeFile()
@@ -272,8 +267,9 @@ class EnKryptosGUI:
         try:
             messageMod.encryptFile(ramFile, 'encrypted_files/' + subject + '.msg.aes', self.password, bit)
 
-            if not joke:  # If user entered joke code, don't override the display window
+            if not joke:  # If user didn't enter a joke code, don't override the display window
                 self.changeText(text='Encrypted Message Successfully Created!')
+                self.changeText(text='', ee=True)  # Use easter egg functionality to wipe text entry
 
             else:
                 self.changeText(text='You\'ve been hit by, you\'ve been struck by, a smooth criminal!\n\n' +
@@ -281,7 +277,7 @@ class EnKryptosGUI:
         except Exception as e:
             self.changeText(text='ERROR: Encryption Failed\nREASON: ' + str(e))  # Show what went wrong
 
-        ramFile.close()
+        ramFile.close()  # Always close files, fake or not, for hacking defense
 
 
 
@@ -331,14 +327,14 @@ class EnKryptosGUI:
         return fullName
 
 
-    def getPathExt(self):  # This function will determine the extension of unencrypted files
+    def getPathExt(self, path):  # This function will determine the extension of unencrypted files
         position = -1  # Index as we iterate backwards
         extension = []  # Empty list for appending
 
         # 1. Append the list until a period has been encountered
         while True:
-            if self.tempPath[position] != '.':
-                extension.append(self.tempPath[position])
+            if path[position] != '.':
+                extension.append(path[position])
                 position -= 1
             else:
                 extension.append('.')
@@ -346,10 +342,14 @@ class EnKryptosGUI:
 
         # 2. Correct list orientation, then compile into string
         extension.reverse()
-        self.tempExten = self.tempExten.join(extension)
+
+        exten = ''
+        exten = exten.join(extension)
+        return exten
 
 
-    def getOldExt(self):  # This function will get the old extension of encrypted files
+
+    def getOldExt(self, path):  # This function will get the old extension of encrypted files
         position = -1  # This will be our index as we iterate backwards
         extension = []  # Empty list predefined for appending
         perCt = 0  # This tells us how many periods we've encountered
@@ -360,27 +360,30 @@ class EnKryptosGUI:
         # Holy shit, this should be so much simpler. I would change it, but it works, I don't remember how it works,
         # and I'm too lazy to spend some time analyzing it to beautify it. Maybe I'll beautify it later.
         while True:
-            if self.tempPath[position] != '.' and perCt == 0:
+            if path[position] != '.' and perCt == 0:
                 position -= 1
 
-            elif self.tempPath[position] == '.' and perCt == 0:
+            elif path[position] == '.' and perCt == 0:
                 perCt = 1
                 position -= 1
 
-            elif self.tempPath[position] != '.' and perCt == 1:
-                extension.append(self.tempPath[position])
+            elif path[position] != '.' and perCt == 1:
+                extension.append(path[position])
                 position -= 1
 
-            elif self.tempPath[position] == '.' and perCt == 1:
+            elif path[position] == '.' and perCt == 1:
                 extension.append('.')
                 break
 
             else:
                 position -= 1
 
-        # 2. Correct list orientation, then assign the extension string to tempExten
+        # 2. Correct list orientation, assign the extension string to exten, then return exten
         extension.reverse()
-        self.tempExten = self.tempExten.join(extension)
+
+        exten = ''
+        exten = exten.join(extension)
+        return exten
 
 
     def randGen(self, size):  # This function will randomly generate text
@@ -442,11 +445,7 @@ class EnKryptosGUI:
 
 
     def easterEgg(self, code):  # Determine if the inputted code calls an easter egg
-        # 1. Make lowercase
-        for char in code:
-            char = char.lower()
-
-        # 2. Dispense appropriate response
+        # 1. Dispense appropriate response
         if code == 'rick roll' or code == 'Rick roll':
             quote = ("We're no strangers to love\n" +
                      "You know the rules and so do I\n" +
@@ -480,12 +479,20 @@ class EnKryptosGUI:
             self.changeText(text=praise, ee=True)
             return True
 
+        elif code == 'EnKryptos':
+            quote = ("In this age of communications that span both distance and time, the only tool we have that " +
+                     "approximates a 'whisper' is encryption. When I cannot whisper in my wife's ear or the ears of " +
+                     "my business partners, and have to communicate electronically, then encryption is our tool to " +
+                     "keep our secrets secret.\n\n-- John McAfee")
+            self.changeText(text=quote, ee=True)
+            return True
+
         else:  # If no appropriate response was found, this is not a valid code
             return False
 
 
     def changeText(self, text, ee=False):  # Gets text and prints it to textbox (ee = easter egg)
-        if ee == False:  # If not an easter egg, print in display window
+        if not ee:  # If not an easter egg, print in display window
             self.decryView.config(state='normal')
             self.decryView.delete('1.0', 'end')
             self.decryView.insert('0.0', text)
@@ -499,11 +506,12 @@ class EnKryptosGUI:
     def run(self):
         self.mainwindow.mainloop()
 
+
 if __name__ == '__main__':
     import tkinter as tk
     root = tk.Tk()
-    root.resizable(height=False, width=False) #Prohibit resizing the height or width of window
-    root.wm_title("EnKryptos v0.3.2") # Sets the title of the window to the string included as an argument
+    root.resizable(height=False, width=False)  # Prohibit resizing the height or width of window
+    root.wm_title("EnKryptos v0.3.3")  # Sets the title of the window to the string included as an argument
 
     app = EnKryptosGUI(root)
     app.run()
