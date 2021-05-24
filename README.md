@@ -5,15 +5,20 @@ Encryption enables communication among adversaries. With EnKryptos, your encrypt
 
 # EnKryptos v0.3.2 Changelog
 
-- Cleaned source code
+- Deleted vestigial code
 
-- Added more notes to source code
+- Removed the global-like temp variables and replaced it with local variables 
 
-- Added more descriptive feedback messages, particularly on instances where behavior was not executed as expected
+- Slightly cleaned code
 
-- Minor fix to improve hacking defense
+- Made decryption button automatically open your encrypted_files folder
+
+- Made encrypted messages clear upon succesful encryption
+
+- Added and edited notes
 
 - Added easter egg
+
 
 # Using Enkryptos as an Executable (Strong Encryption Strength)
 
