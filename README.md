@@ -5,19 +5,11 @@ Encryption enables communication among adversaries. With EnKryptos, your encrypt
 
 # EnKryptos v0.3.2 Changelog
 
-- Deleted vestigial code
+- Fixed EnKryptos freezing when working with large files
 
-- Removed the global-like temp variables and replaced it with local variables 
+- Added scrollbars to the message creator and text display window
 
-- Slightly cleaned code
-
-- Made decryption button automatically open your encrypted_files folder
-
-- Made encrypted messages clear upon succesful encryption
-
-- Added and edited notes
-
-- Added easter egg
+- Added descritions to code sections
 
 
 # Using Enkryptos as an Executable (Strong Encryption Strength)
