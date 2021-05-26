@@ -30,11 +30,15 @@ Extract it and do the following:
 
 **Windows:**
 
+Download the file titled EnKryptos-Win.zip. Extract it once downloaded.
+
 After extracting the zip, find the EnKryptos.exe file within the new folder and double click to run. Don't move the executable from its folder -- there's a lot of necessary parts hidden within the folder (makes it easier for you to find the right file).
 
 **Linux:**
 
-After extracting the tarball, cd into the extracted folder. Locate the EnKryptos file and use "./EnKryptos" to execute it. 
+Download the file called EnKryptos-Lin.tar.gz. Extract it once downloaded.
+
+After extracting the tarball, cd into the extracted folder. Enter the command "./EnKryptos" to execute it. 
 
 # Using Enkryptos as a Script (Ultra Strength)
 
