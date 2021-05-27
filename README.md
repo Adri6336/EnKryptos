@@ -51,7 +51,7 @@ Strength Reason: since the script demands a custom keyPass assignment, your file
 
 - Keys created with the script version will not be interoperable with the executable version. If you want to share your key with other parties that are also using the script version, you'll need to give them the value you entered for the keyPass variable; they must use this password as well to decrypt your messages.
 
-- 500 character key fed into a SHA-256 hashing function to make it compatible with the AES-256 cipher. Both the hashing and AES256-CBC encryption / decryption are handled by [pyAesCrypt](https://pypi.org/project/pyAesCrypt/6.0.0/) (or its version I slightly modified), a python module created by Marco Bellaccini -> marco.bellaccini@gmail.com
+- 500 character key fed into a SHA-256 hashing function to make it compatible with the AES-256 cipher. Both the hashing and AES256-CBC encryption / decryption are handled by [pyAesCrypt](https://pypi.org/project/pyAesCrypt/6.0.0/) (or its version I slightly modified), a python module created by Marco Bellaccini.
 
 
 # Q&A
