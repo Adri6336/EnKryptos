@@ -9,7 +9,7 @@ Encryption enables communication among adversaries. With EnKryptos, your encrypt
 
 - Added scrollbars to the message creator and text display window
 
-- Added descritions to code sections
+- Added descriptions to code sections
 
 
 # Using Enkryptos as an Executable (Strong Encryption Strength)
