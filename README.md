@@ -1,7 +1,7 @@
 # EnKryptos
 ***By using EnKryptos, you agree to use it at your own risk, hold me free of any responsiblilty should any kinds of loss or damage occur, and only use it on information you either own or have explicit permission to encrypt. This program will encrypt files, so if you use it negligently you could permanently lose access to your information. Be sure to use EnKryptos intelligently and with caution.***
 
-Encryption enables communication among adversaries. With EnKryptos, your encrypted files and messages will be virtually unbreakable. This application uses the AES256-CBC encryption protocol (a cipher approved by the U.S. National Security Agency (NSA) for protecting top-secret information) with a random key of 500 character length.
+Encryption enables communication among adversaries. With EnKryptos, your encrypted files and messages will be virtually unbreakable. This application uses the AES256-CBC encryption protocol (a cipher approved by the U.S. National Security Agency (NSA) for protecting top-secret information) with a random key of 500 character length.^*
 
 # EnKryptos v0.3.4 Changelog
 
@@ -50,6 +50,8 @@ Strength Reason: since the script demands a custom keyPass assignment, your file
 - Keys are unique and non-recoverable. If you somehow lose your key, your encrypted files will made useless clusters of obfuscated data. Do not lose your key.
 
 - Keys created with the script version will not be interoperable with the executable version. If you want to share your key with other parties that are also using the script version, you'll need to give them the value you entered for the keyPass variable; they must use this password as well to decrypt your messages.
+
+\* 500 character key fed into a SHA-256 hashing function to make it compatible with the AES-256 cipher.
 
 
 # Q&A
