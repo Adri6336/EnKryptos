@@ -3,7 +3,7 @@
 
 Encryption enables communication among adversaries. With EnKryptos, your encrypted files and messages will be virtually unbreakable. This application uses the AES encryption protocol (a cipher approved by the U.S. National Security Agency (NSA) for protecting top-secret information) with a random key of 500 character length.
 
-# EnKryptos v0.3.2 Changelog
+# EnKryptos v0.3.4 Changelog
 
 - Fixed EnKryptos freezing when working with large files
 
