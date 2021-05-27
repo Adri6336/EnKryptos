@@ -1,7 +1,7 @@
 # EnKryptos
 ***By using EnKryptos, you agree to use it at your own risk, hold me free of any responsiblilty should any kinds of loss or damage occur, and only use it on information you either own or have explicit permission to encrypt. This program will encrypt files, so if you use it negligently you could permanently lose access to your information. Be sure to use EnKryptos intelligently and with caution.***
 
-Encryption enables communication among adversaries. With EnKryptos, your encrypted files and messages will be virtually unbreakable. This application uses the AES encryption protocol (a cipher approved by the U.S. National Security Agency (NSA) for protecting top-secret information) with a random key of 500 character length.
+Encryption enables communication among adversaries. With EnKryptos, your encrypted files and messages will be virtually unbreakable. This application uses the AES256-CBC encryption protocol (a cipher approved by the U.S. National Security Agency (NSA) for protecting top-secret information) with a random key of 500 character length.
 
 # EnKryptos v0.3.4 Changelog
 
