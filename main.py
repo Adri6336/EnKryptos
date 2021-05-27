@@ -6,9 +6,11 @@ import pyAesCryptMod as messageMod  # Needed for message encryption (allows me t
 import os  # Needed for creating files, identifying valid paths, and deleting files
 from random import randint  # Needed for key generation
 from io import StringIO as fakeFile  # Needed for hacking defense (prevents hard-drive files from being created)
+import threading  # Allows EnKryptos to run smoother by preventing it from freezing with large files / arduous tasks
 
 
 class EnKryptosGUI:
+    workLock = False  # This prevents more operations from being performed simultaneously
     homeDir = os.getcwd()  # Will hold pathway to EnKryptos' working directory
     opSys = os.name  # If posix, Linux; if nt, Windows
     password = ''  # The EnKryptos key information will be inserted here
@@ -63,13 +65,13 @@ class EnKryptosGUI:
         self.encrypt_button = ttk.Button(self.MainFrame)
         self.encrypt_button.config(text='Encrypt File')
         self.encrypt_button.place(anchor='nw', height='50', relx='0.05', rely='0.15', width='200', x='0', y='0')
-        self.encrypt_button.configure(command=self.encrypt)
+        self.encrypt_button.configure(command=lambda: self.workCrypt(operation='encrypt'))
 
         # Decrypt File Button
         self.decrypt_button = ttk.Button(self.MainFrame)
         self.decrypt_button.config(text='Decrypt File / Message')
         self.decrypt_button.place(anchor='nw', height='50', relx='0.05', rely='0.36', width='200', x='0', y='0')
-        self.decrypt_button.configure(command=self.decrypt)
+        self.decrypt_button.configure(command=lambda: self.workCrypt(operation='decrypt') )
 
         # Message Subject Text Entry (sets file name)
         self.messageName = ttk.Entry(self.MainFrame)
@@ -82,7 +84,7 @@ class EnKryptosGUI:
         self.Encrypt_Text = ttk.Button(self.MainFrame)
         self.Encrypt_Text.config(text='Encrypt Message')
         self.Encrypt_Text.place(anchor='nw', relx='0.46', rely='0.56', x='0', y='0')
-        self.Encrypt_Text.config(command=self.encryptMessage)
+        self.Encrypt_Text.config(command=lambda: self.workCrypt(operation='message'))
 
         # Message Content Entry (content will be encrypted)
         self.Secret_Message = tk.Text(self.MainFrame)
@@ -114,12 +116,23 @@ class EnKryptosGUI:
         # Message / Feedback Display Window
         self.decryView = tk.Text(self.MainFrame)
         self.decryView.config(height='10', state='disabled', width='50', wrap='word')
-        self.decryView.place(anchor='nw', height='75', relx='0.01', rely='0.73', width='585', x='0', y='0')
+        self.decryView.place(anchor='nw', height='75', relx='0.01', rely='0.73', width='575', x='0', y='0')
 
         # Label For Display Window
         self.label_1 = ttk.Label(self.MainFrame)
         self.label_1.config(text='Decrypted Message / Notification Viewer')
         self.label_1.place(anchor='nw', relx='0.01', rely='.66', x='0', y='0')
+
+        # Scrollbars
+        self.scrollbar_view = ttk.Scrollbar(self.MainFrame)  # This is the display window's scrollbar
+        self.scrollbar_view.configure(orient='vertical')
+        self.scrollbar_view.place(anchor='nw', height='75', relx='.97', rely='.73', x='0', y='0')
+        self.scrollbar_view.configure(command=self.decryView.yview)
+
+        self.scrollbar_messEnter = ttk.Scrollbar(self.MainFrame)  # This is the message text entry scrollbar
+        self.scrollbar_messEnter.configure(orient='vertical')
+        self.scrollbar_messEnter.place(anchor='nw', height='115', relx='.96', rely='.15', x='0', y='0')
+        self.scrollbar_messEnter.configure(command=self.Secret_Message.yview)
 
         # GUI Config
         self.MainFrame.config(height='300', relief='flat', takefocus=False, width='600')
@@ -139,26 +152,83 @@ class EnKryptosGUI:
 
     # ================================================
     # ================================================
+    # ========== Redirection / Threads ===============
+    # ================================================
+    # ================================================
+    # => This function acts as a way-station that
+    # creates threads as it redirects to the specified
+    # functions. It is given its own section as it is
+    # rather verbose
+
+
+    def workCrypt(self, operation):  # This function calls threads for processes to prevent freezing
+        if operation == 'encrypt':  # If we're encrypting a file
+            if not self.workLock:  # If nothing is currently being processed
+                file = filedialog.askopenfilename(initialdir=self.homeDir, title='Select a File to Encrypt',
+                                                  filetypes=(("All Files", "*.*"), ('Text', '*.txt')))
+
+                if not os.path.isfile(str(file)):  # If there's no path, the user exited out. Abort.
+                    return
+
+                self.changeText(text='Working on encryption, please stand by.')
+                process = threading.Thread(target=lambda: self.encrypt(pathway=file))  # Create function thread
+                process.start()  # Start function thread
+
+            else:  # If something is being processed, ignore command
+                return
+
+        elif operation == 'decrypt':  # If we're decrypting a file
+            if not self.workLock:
+                # 1. Ensure that an encrypted_files directory exists
+                self.folderExists(type='encrypt')  # If the encrypted files folder does not exist make it
+                if self.opSys == 'nt':  # If OS == Windows
+                    folder = self.homeDir + '\\encrypted_files'
+
+                else:  # If OS == Linux-based
+                    folder = self.homeDir + '/encrypted_files'
+
+                # 2. Get pathway to .aes file
+                file = filedialog.askopenfilename(initialdir=folder, title='Select a File to Decrypt',
+                                                     filetypes=(("Encrypted Files", "*.aes"), ('Invalid Files', '*.*')))
+
+                # 3. Determine if this is a valid file to decrypt
+                if not os.path.isfile(str(file)):  # If there's no valid path, the user exited out. Abort.
+                    return
+                self.changeText(text='Working on decryption, please stand by.')
+                process = threading.Thread(target=lambda: self.decrypt(pathway=file))
+                process.start()
+
+            else:
+                return
+
+        elif operation == 'message':  # If we're creating an encrypted message
+            if not self.workLock:  # This doesn't require verification as message-creation is handled in-app
+                process = threading.Thread(target=self.encryptMessage)  # Doesn't use lambda as no arguments are passed
+                process.start()
+
+            else:
+                return
+
+    # ================================================
+    # ================================================
     # ========== Encryption / Decryption =============
     # ================================================
     # ================================================
+    # => These are the functions needed for encryption
+    # and decryption services
 
 
-    def encrypt(self):  # This function will encrypt files
+    def encrypt(self, pathway):  # This function will encrypt files
         try:
-            # 1. Acquire new pathway and get relevant information
-            pathway = filedialog.askopenfilename(initialdir=self.homeDir, title='Select a File to Encrypt',
-                                                 filetypes=(("All Files", "*.*"), ('Text', '*.txt')))
-
-            if not os.path.isfile(str(pathway)):  # If there's no path, the user exited out. Abort.
-                return
-
+            # 1. Obtain worklock and get relevant information from pathway
+            self.workLock = True
             extension = self.getPathExt(path=pathway)  # Process the path: get the extension
             fileName = self.getName(path=pathway, encrypt=True)  # Identify the name of the file
 
             # 2. Determine if user is trying to re-encrypt an already encrypted file. If so, abort.
             if extension == '.aes' or extension == '.EDK':
                 self.changeText(text='ERROR: Process Aborted\nREASON: Attempt to encrypt already encrypted file')
+                self.workLock = False
                 return
 
             # 3. Begin encryption and properly save file
@@ -172,56 +242,47 @@ class EnKryptosGUI:
 
         except Exception as e:  # If something goes wrong, alert user and exit the function.
             self.changeText(text='ERROR: Encryption Failed\nREASON: ' + str(e))
+            self.workLock = False
+
+        # Release Worklock
+        self.workLock = False
 
 
-    def decrypt(self):  # This function will decrypt files
+    def decrypt(self, pathway):  # This function will decrypt files
         try:
-            # 1. Ensure that an encrypted_files directory exists
-            self.folderExists(type='encrypt')  # If the encrypted files folder does not exist make it
-            if self.opSys == 'nt':  # If OS == Windows
-                folder = self.homeDir + '\\encrypted_files'
-
-            else:  # If OS == Linux-based
-                folder = self.homeDir + '/encrypted_files'
-
-            # 2. Get pathway to .aes file
-            pathway = filedialog.askopenfilename(initialdir=folder, title='Select a File to Decrypt',
-                                                 filetypes=(("Encrypted Files", "*.aes"), ('Invalid Files', '*.*')))
-
-            # 3. Determine if this is a valid file to decrypt
-            if not os.path.isfile(str(pathway)):  # If there's no valid path, the user exited out. Abort.
-                return
-
+            # 1. Obtain worklock and identify current file extension
+            self.workLock = True
             extension = self.getPathExt(path=pathway)  # Store the current extension of the file
 
             if extension != '.aes' and not extension == '.EDK':  # If current file is not encrypted, abort
                 self.changeText(text='ERROR: Process Aborted\nREASON: Attempt ' +
                                      'to decrypt a file that\'s either unencrypted or encrypted with another app')
+                self.workLock = False
                 return
 
             elif extension == '.EDK':  # If file is EDK, refuse access
                 self.changeText(text='ERROR: Access Denied\nREASON: Attempt ' +
                                      'to decrypt EnKryptos decryption key')
+                self.workLock = False
                 return
 
-            # 4. Identify pre-encryption filetype
+            # 2. Identify pre-encryption filetype
             oldExten = self.getOldExt(pathway)
             if oldExten == '.msg':  # Detect if file is an EnKryptos message
                 isMessage = True
             else:
                 isMessage = False
 
-            # 5. Identify the name of the file
+            # 3. Identify the name of the file
             fileName = self.getName(path=pathway, encrypt=False)
 
-            # 6. Begin decryption process
+            # 4. Begin decryption process
             if not isMessage:  # If the file is not a msg file, decrypt normally
                 if pathway != '' and pathway != 'No File Selected':
                     bit = 64 * 1024
                     self.folderExists(type='decrypt')
                     pyAesCrypt.decryptFile(pathway, 'decrypted_files/' + fileName + oldExten, self.password, bit)
-                    # finPath = 'decrypted_files/' + fileName + oldExten  (Not sure what this was for)
-                    self.changeText(text=oldExten + ' File Successfully Decrypted!')
+                    self.changeText(text='File (' + oldExten + ') Successfully Decrypted!')
 
             else:  # If the file is an msg file, decrypt using fake file and output data to display window
                 if pathway != '' and pathway != 'No File Selected':
@@ -234,16 +295,19 @@ class EnKryptosGUI:
         except:
             self.changeText(text='ERROR: Decryption Failed\nREASON: ' +
                                  'Either the wrong key is inserted or the file is corrupted')
+            self.workLock = False
+
+        self.workLock = False  # Release worklock
 
 
     def encryptMessage(self):  # This function will encrypt a new message
+        self.workLock = True
         # 1. Get message contents, determine if name is valid (if not, clean it)
         toEncode = self.Secret_Message.get("1.0", "end-1c")  # Gets message content
         subject = self.messageName.get()  # Gets message title
 
         # 1.1 Easter Eggs or test codes
         isJoke = self.easterEgg(code=subject)  # Returns a bool
-
         if isJoke:
             joke = True
 
@@ -276,8 +340,10 @@ class EnKryptosGUI:
                                      '(Btw, your message was encrypted)')
         except Exception as e:
             self.changeText(text='ERROR: Encryption Failed\nREASON: ' + str(e))  # Show what went wrong
+            self.workLock = False
 
         ramFile.close()  # Always close files, fake or not, for hacking defense
+        self.workLock = False
 
 
 
@@ -287,6 +353,9 @@ class EnKryptosGUI:
     # ========== File Creation and Organization ======
     # ================================================
     # ================================================
+    # => These functions handle folder creation, file
+    # interpretations, and random generation (for EDK
+    # files and 'test random' display)
 
 
     def getName(self, path, encrypt):  # This function will determine the name of files
@@ -442,6 +511,8 @@ class EnKryptosGUI:
     # ========== Misc. ===============================
     # ================================================
     # ================================================
+    # => These functions perform tasks that do not fall
+    # into one of previously defined groups
 
 
     def easterEgg(self, code):  # Determine if the inputted code calls an easter egg
@@ -511,7 +582,7 @@ if __name__ == '__main__':
     import tkinter as tk
     root = tk.Tk()
     root.resizable(height=False, width=False)  # Prohibit resizing the height or width of window
-    root.wm_title("EnKryptos v0.3.3")  # Sets the title of the window to the string included as an argument
+    root.wm_title("EnKryptos v0.3.4")  # Sets the title of the window to the string included as an argument
 
     app = EnKryptosGUI(root)
     app.run()
