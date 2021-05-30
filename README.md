@@ -53,6 +53,8 @@ Strength Reason: since the script demands a custom keyPass assignment, your file
 
 - 500 character key fed into a SHA-256 hashing function to make it compatible with the AES-256 cipher. Both the hashing and AES256-CBC encryption / decryption are handled by [pyAesCrypt](https://pypi.org/project/pyAesCrypt/6.0.0/) (or its version I slightly modified), a python module created by Marco Bellaccini.
 
+- A vulnerability has been discovered within a module used by pyAesCrypt. Because of this, I will be transitioning EnKryptos to use pycryptodome instead of pyAesCrypt. I am not aware of any way that this vulnerability would undermine EnKryptos, given its offline nature, but I will transition away from it in excess of caution.
+
 
 # Q&A
 Q: How to use EnKryptos to safely send data over the internet?
