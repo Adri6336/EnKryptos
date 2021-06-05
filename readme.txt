@@ -1,4 +1,4 @@
-Welcome to EnKryptos v0.3.1!
+Welcome to EnKryptos v0.3.2!
 Created by Adrian Villegas
 
 ----------------------------
