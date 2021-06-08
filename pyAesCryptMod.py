@@ -36,7 +36,9 @@
 
 
 # Modified by Adrian Villegas
-# I have no idea what I'm doing here, but I somehow made it work
+# I have no idea what I'm doing here, but I somehow made it work.
+# Addendum: Looks like this effort was unnecessary -- the author has instructions on how to use a byte stream on their PyPi page :P.
+# Since it works and I've already coded it into main.py, I'm gonna leave it.  
 # Changelog:
 #   - Deleted some stuff
 #   - Made pyAesCrypt able to use StringIO files
