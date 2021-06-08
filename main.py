@@ -33,7 +33,7 @@ class EnKryptosGUI:
         # 1. Get or create key
         if os.path.isfile('key/key.EDK'):  # If we've got a key already
             # 1. Decrypt key and assign contents to password
-            bit = 64 * 1024
+            bit = 64 * 1024  # This represents the buffer size, idk why I assigned it to "bit" when I first wrote this 
             key = fakeFile()
             messageMod.decryptFile('key/key.EDK', key, self.keyPass, bit)
             self.password = key.getvalue()
