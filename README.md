@@ -32,7 +32,7 @@ After extracting the zip, find the EnKryptos.exe file within the new folder and 
 
 Download the file called EnKryptos-Lin.tar.gz. Extract it once downloaded.
 
-After extracting the tarball, cd into the extracted folder. Enter the command "./EnKryptos" to execute it. 
+After extracting the tarball, go into the extracted folder. You should be able to simply enter the command "./EnKryptos" or double click the EnKryptos file to execute it on most distributions. If this doesn't work, open the terminal, cd into the folder entitled "EK-Data", and enter "./EnKryptos". 
 
 # Using Enkryptos as a Script (Ultra Strength)
 
